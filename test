@@ -1,0 +1,52 @@
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import ttk
+
+# hoved vinduet
+root = tk.Tk()
+root.geometry("400x300")
+root.title("UI")
+
+def on_button_click():
+    messagebox.showinfo("Besked", "Hej")
+
+def close_window():
+    root.destroy()
+
+# frame venstre side
+left_frame = ttk.Frame(root, padding=10, relief="solid")
+left_frame.pack(side='left', fill='y')  
+
+# knapper venstre side
+button_1 = ttk.Button(left_frame, text="Navn", command=on_button_click)
+button_2 = ttk.Button(left_frame, text="Sted",)
+button_3 = ttk.Button(left_frame, text="Login",)
+button_4 = ttk.Button(left_frame, text="Kontakt",)
+button_5 = ttk.Button(left_frame, text="Bonus",)
+button_6 = ttk.Button(left_frame, text="Bonus 2",)
+
+button_1.pack(padx=10, pady=5)
+button_2.pack( padx=10, pady=5)
+button_3.pack( padx=10, pady=5)
+button_4.pack( padx=10, pady=5)
+button_5.pack( padx=10, pady=5)
+button_6.pack( padx=10, pady=5)
+
+
+# Create another frame and position it to the right side
+right_frame = ttk.Frame(root, padding=10, relief="solid")
+right_frame.pack(side='right', fill='both', expand=True) 
+
+# frame højre side
+right_label = ttk.Label(right_frame, padding=10)
+right_label.pack(side='right', fill='y')  
+# right_label.pack(side='right', fill='y', padx=10, pady=10)  # Placerer label til højre
+
+btn_close = tk.Button(right_frame, text="Luk vindet", command=close_window)
+
+btn_close.place  (x=200, y=200)
+
+colored_frame = tk.Frame(right_frame, bg="lightblue", relief="solid", borderwidth=2)
+colored_frame.pack(padx=20, pady=20, fill='both', expand=True)
+# Start the main loop
+root.mainloop()
