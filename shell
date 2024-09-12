@@ -25,7 +25,7 @@ button_4 = ttk.Button(left_frame, text="Kontakt",)
 button_5 = ttk.Button(left_frame, text="Bonus",)
 button_6 = ttk.Button(left_frame, text="Bonus 2",)
 
-button_1.pack(padx=10, pady=5)
+button_1.pack( padx=10, pady=5)
 button_2.pack( padx=10, pady=5)
 button_3.pack( padx=10, pady=5)
 button_4.pack( padx=10, pady=5)
@@ -33,13 +33,13 @@ button_5.pack( padx=10, pady=5)
 button_6.pack( padx=10, pady=5)
 
 
-# Create another frame and position it to the right side
+# frame højre side
 right_frame = ttk.Frame(root, padding=10, relief="solid")
 right_frame.pack(side='right', fill='both', expand=True) 
 
 # frame højre side
 right_label = ttk.Label(right_frame, text="Tekst", padding=10)
-right_label.pack(fill='y', padx=10, pady=10)  # Juster padding og placering
+right_label.pack(fill='y', padx=10, pady=10)  
 
 # Knap højre side
 btn_close = ttk.Button(right_frame, text="Luk vindet", command=close_window)
@@ -47,8 +47,8 @@ btn_close.place(relx=1.0, rely=1.0, anchor='se')
 
 
 colored_frame = tk.Frame(right_frame, bg="lightgrey", relief="solid", borderwidth=2, width=300, height=150)
-colored_frame.pack(padx=10, pady=10,)  # Fylder rammen og justerer størrelsen
-#colored_frame.pack(padx=10, pady=10, fill='both', expand=True)
+colored_frame.pack(padx=10, pady=10,)  
+
 
 # Start the main loop
 root.mainloop()

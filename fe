@@ -1,0 +1,107 @@
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import ttk
+import requests
+
+# hoved vinduet
+root = tk.Tk()
+root.geometry("500x400")
+root.title("UI")
+
+# Global variabel til at gemme brugerdata
+user_data = {}
+
+# Funktioner
+def close_window():
+    root.destroy()
+
+def clear_frame():
+    # Fjerner alle widgets i den givne frame
+    for widget in colored_frame.winfo_children():
+        widget.destroy()
+
+def fetch_and_display_data():
+    global user_data
+    try:
+        response = requests.get("https://randomuser.me/api/") 
+        user_data = response.json()['results'][0]  # Gemmer hele brugerdataen globalt
+        
+        # Navne data
+        # sted
+        location = user_data['location']
+        city = location['city']
+        country = location['country']
+        street = location['street']
+        street_name = street['name']
+        street_number = street['number']
+        #Navn
+        data = user_data['name']
+        title = data['title']
+        first_name = data['first']
+        last_name = data['last']
+        #E-mail
+        email = user_data['email']
+        #phone
+        phone = user_data['phone']
+        cell = user_data['cell']    
+        #User
+        login_data = user_data['login']
+        username = login_data['username']
+        #Password
+        
+        password = login_data['password'] 
+        
+        clear_frame()  
+
+        # data i den farvede frame
+        #Navn
+        name_label = ttk.Label(colored_frame, text=f"Navn: {title} {first_name} {last_name}", padding=5)
+        name_label.pack(padx=5, pady=5)  
+        #Sted
+        location_label = ttk.Label(colored_frame, text=f"Adresse: {street_number} {street_name}, {city}, {country}", padding=5)
+        location_label.pack(padx=5, pady=5)
+        #Email
+        email_label = ttk.Label(colored_frame, text=f"Email: {email}", padding=5)
+        email_label.pack(padx=5, pady=5)
+        #phone
+        phone_label = ttk.Label(colored_frame, text=f"Phone: {phone} Cell: {cell}", padding=5)
+        phone_label.pack(padx=5, pady=5)
+        #User
+        login_label = ttk.Label(colored_frame, text=f"Username: {username}", padding=5)
+        login_label.pack(padx=5, pady=5)
+        #Password
+        password_label = ttk.Label(colored_frame, text=f"Password: {password}", padding=5)
+        password_label.pack(padx=5, pady=5)
+    except Exception as e:
+        messagebox.showerror("Fejl", f"Kunne ikke hente data: {e}")
+
+
+# Frame venstre side
+left_frame = ttk.Frame(root, padding=10, relief="solid")
+left_frame.pack(side='left', fill='y')  
+
+# Knapper venstre side
+button_1 = ttk.Button(left_frame, text="Info", command=fetch_and_display_data)
+button_2 = ttk.Button(left_frame, text="Clear", command=clear_frame)
+
+button_1.pack(padx=10, pady=5)
+button_2.pack(padx=10, pady=5)
+
+# Frame højre side
+right_frame = ttk.Frame(root, padding=10, relief="solid")
+right_frame.pack(side='right', fill='both', expand=True) 
+
+# Label i højre side
+right_label = ttk.Label(right_frame, text="Profil", padding=10)
+right_label.pack(fill='y', padx=10, pady=10)  
+
+# Knap til at lukke vinduet i højre side
+btn_close = ttk.Button(right_frame, text="Luk vindue", command=close_window)
+btn_close.place(relx=1.0, rely=1.0, anchor='se')
+
+# Farvet frame inde i right_frame
+colored_frame = tk.Frame(right_frame, bg="lightgrey", relief="solid", borderwidth=2, width=300, height=150)
+colored_frame.pack(padx=10, pady=10)  
+
+# Start hovedløkken
+root.mainloop()
