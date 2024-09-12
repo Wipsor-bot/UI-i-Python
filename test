@@ -4,7 +4,7 @@ from tkinter import ttk
 
 # hoved vinduet
 root = tk.Tk()
-root.geometry("400x300")
+root.geometry("500x400")
 root.title("UI")
 
 def on_button_click():
@@ -38,15 +38,17 @@ right_frame = ttk.Frame(root, padding=10, relief="solid")
 right_frame.pack(side='right', fill='both', expand=True) 
 
 # frame højre side
-right_label = ttk.Label(right_frame, padding=10)
-right_label.pack(side='right', fill='y')  
-# right_label.pack(side='right', fill='y', padx=10, pady=10)  # Placerer label til højre
+right_label = ttk.Label(right_frame, text="Tekst", padding=10)
+right_label.pack(fill='y', padx=10, pady=10)  # Juster padding og placering
 
-btn_close = tk.Button(right_frame, text="Luk vindet", command=close_window)
+# Knap højre side
+btn_close = ttk.Button(right_frame, text="Luk vindet", command=close_window)
+btn_close.place(relx=1.0, rely=1.0, anchor='se')
 
-btn_close.place  (x=200, y=200)
 
-colored_frame = tk.Frame(right_frame, bg="lightblue", relief="solid", borderwidth=2)
-colored_frame.pack(padx=20, pady=20, fill='both', expand=True)
+colored_frame = tk.Frame(right_frame, bg="lightgrey", relief="solid", borderwidth=2, width=300, height=150)
+colored_frame.pack(padx=10, pady=10,)  # Fylder rammen og justerer størrelsen
+#colored_frame.pack(padx=10, pady=10, fill='both', expand=True)
+
 # Start the main loop
 root.mainloop()
